@@ -1,0 +1,90 @@
+<?php if (!defined('THINK_PATH')) exit();?><!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>图书销售系统-退货记录表</title>
+    <link rel="stylesheet" type="text/css" href="public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="public/css/animate.css" type="text/css" />
+</head>
+<body>
+    <?php
+ include 'navbar.php'; ?>
+    <div class="container">
+        <div class="panel panel-default" style="margin-top:80px;">
+            <div class="panel-heading">退货记录表</div>
+            <div class="table-responsive">
+                <table role="grid" id="DataTables_Table_1"class="table table-striped m-b-none">
+                    <thead>
+                        <tr role="row">
+                            <th>退书序号</th>
+                            <th>销售序号</th>
+                            <th>ISBN</th>
+                            <th>书名</th>
+                            <th>出版社</th>
+                            <th>价格</th>
+                            <th>退货数量</th>
+                            <th>退货总价</th>
+                            <th>退货日期</th>
+                        </tr>
+                    </thead>
+                    <tbody id="saleRecordBody">
+                        <!-- <tr class="odd" role="row">
+                            <td class="sorting_1">《JavaScript进阶》</td>
+                            <td>不知道</td>
+                            <td>机械工业出版社</td>
+                            <td>1.7</td>
+                            <td>1000</td>
+                        </tr>
+                        <tr class="even" role="row">
+                            <td class="sorting_1">Gecko</td>
+                            <td>Firefox 1.5</td>
+                            <td>Win 98+ / OSX.2+</td>
+                            <td>1.8</td>
+                            <td>A</td>
+                        </tr> -->
+                        
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+<script type="text/javascript" src="public/js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="public/js/bootstrap.min.js"></script> 
+<script type="text/javascript">
+    $(document).ready(function()
+    {
+        $('#mynav').find('li').each(function(i)
+        {
+            if(i == 3)
+                $(this).addClass('active');
+        });
+
+        $.ajax({
+            type: "GET",
+            url: "http://localhost/BookSale/contraller/stock_outrecord.php",
+            data:{},
+            dataType: "json",
+            success: function(result)
+            {
+                
+                console.log(result);
+                for(var i = 0; i < result.length; i++)
+                {
+                    $('#saleRecordBody').append($('<tr class="odd" role="row"><td class="sorting_1">'+result[i].id+'</td><td>'+result[i].sale_id+'</td><td>'+result[i].ISBN+'</td><td>《'+result[i].book_name+'》</td><td>'+result[i].publisher+'</td><td>'+result[i].price+'</td><td>'+result[i].stock_out_size+'</td><td>'+result[i].total_price+'</td><td>'+result[i].stock_out_date.date+'</td></tr>'));
+                }
+                
+            },
+            error: function()
+            {
+                alert("ajax submit error");
+            }
+
+        })
+    })
+</script>
+</body>
+</html>

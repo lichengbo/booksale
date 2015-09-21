@@ -1,2 +1,2 @@
 # booksale
-This is a book sale system for stydy thinkphp demo.
+This is a book sale system for study thinkphp demo.
