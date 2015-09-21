@@ -20,11 +20,31 @@ class IndexController extends Controller {
 
         if($result['password'] == $password) {
             echo 'success';
+            $_SESSION['userinfo'] = $result;
         } else {
             echo 'username or password error';
         }
     }
 
+    function logout() {
+        session_unset();
+        session_destroy();
+    }
+
+    function userinfo() {
+        $userinfo = $_SESSION['userinfo'];
+        if($userinfo) {
+            $userinfo['status'] = true;
+            $this->ajaxReturn($userinfo);
+        } else {
+            $userinfo['status'] = false;
+            $userinfo['errorinfo'] = '您还没有登录，没有查看权限。';
+            $this->ajaxReturn($userinfo);
+        }
+
+
+
+    }
     function register() {
         $this->display('register');
     }

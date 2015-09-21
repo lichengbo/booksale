@@ -35,6 +35,27 @@
                         </ul>
                     </li>
                 </ul>
+
+                <ul class="nav navbar-nav pull-right">
+                    <li class="dropdown">
+                        <a id="avatar" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <img src="" title="头像" class="img-circle">
+
+                        </a>
+                        <ul class="dropdown-menu animated fadeInRight">
+                            <li>
+                                <a href="#">账户信息</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a id="logout" href="index.php?c=index&a=login">注销</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
+
+<script src="public/js/jquery-1.11.2.min.js"></script>
+<script src="public/js/userinfo.js"></script>
