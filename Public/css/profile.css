@@ -1,0 +1,19 @@
+#useravatar {
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+}
+
+#uploadimg {
+    filter:alpha(opacity=0); /*IE滤镜，透明度50%*/
+    -moz-opacity:0; /*Firefox私有，透明度50%*/
+    opacity:0;/*其他，透明度50%*/
+    font-size: 0;
+    margin-top: -20px;
+}
+
+.row {
+    padding-top: 20px;
+}
+
+.help{display:none;color:#d9534f;}

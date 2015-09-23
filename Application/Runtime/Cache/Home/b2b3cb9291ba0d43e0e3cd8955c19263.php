@@ -51,7 +51,7 @@
           </div>
           <div class="modal-body">
             <div class="table-responsive">
-                    <table role="grid" id="DataTables_Table_1"class="table table-striped m-b-none">
+                    <table role="grid" id="DataTables_Table_"class="table table-striped m-b-none">
                         <tbody id="buydetailbody">
                             <tr></tr>
                         </tbody>

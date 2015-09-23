@@ -26,25 +26,24 @@ class IndexController extends Controller {
         }
     }
 
+    function checkyzm() {
+        $value = $_POST['value'];
+        if($value == strtolower($_SESSION['helloweba_char'])) {
+            $result['status'] = true;
+            $result['info'] = '验证码正确';
+            $this->ajaxReturn($result);
+        } else {
+            $result['status'] = false;
+            $result['info'] = '验证码错误';
+            $this->ajaxReturn($result);
+        }
+    }
+
     function logout() {
         session_unset();
         session_destroy();
     }
 
-    function userinfo() {
-        $userinfo = $_SESSION['userinfo'];
-        if($userinfo) {
-            $userinfo['status'] = true;
-            $this->ajaxReturn($userinfo);
-        } else {
-            $userinfo['status'] = false;
-            $userinfo['errorinfo'] = '您还没有登录，没有查看权限。';
-            $this->ajaxReturn($userinfo);
-        }
-
-
-
-    }
     function register() {
         $this->display('register');
     }
@@ -73,13 +72,16 @@ class IndexController extends Controller {
                 $this->ajaxReturn($registerInfo);
             }
         }
-        
+    }
 
+    function profile() {
+        $this->display('navbar');
+        $this->display('userinfo');
     }
 
     function stock_in() {
         $this->display('navbar');
-        $this->display('stock_in');
+        $this->display();
     }
 
     function stock_in_data() {
@@ -91,7 +93,7 @@ class IndexController extends Controller {
 
     function stock_out() {
         $this->display('navbar');
-        $this->display('stock_out');
+        $this->display();
     }
 
     function stock_out_data() {
@@ -99,7 +101,7 @@ class IndexController extends Controller {
 
     function sale() {
         $this->display('navbar');
-        $this->display('sale');
+        $this->display();
     }
 
     function sale_data() {
@@ -108,7 +110,7 @@ class IndexController extends Controller {
 
     function storage() {
         $this->display('navbar');
-        $this->display('storage');
+        $this->display();
     }
 
     function storage_data() {
@@ -117,7 +119,7 @@ class IndexController extends Controller {
 
     function salerecord() {
         $this->display('navbar');
-        $this->display('salerecord');
+        $this->display();
     }
 
     function salerecord_data() {
@@ -126,7 +128,7 @@ class IndexController extends Controller {
 
     function stock_inrecord() {
         $this->display('navbar');
-        $this->display('salerecord');
+        $this->display();
     }
 
     function stock_inrecord_data() {
@@ -135,7 +137,7 @@ class IndexController extends Controller {
 
     function stock_outrecord() {
         $this->display('navbar');
-        $this->display('salerecord');
+        $this->display();
     }
 
     function stock_outrecord_data() {

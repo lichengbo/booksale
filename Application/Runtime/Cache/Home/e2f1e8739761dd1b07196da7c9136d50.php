@@ -46,7 +46,7 @@
                     <div class="col-sm-3">
                         <input type="text" class="form-control" id="yzm" placeholder="输入验证码" maxlength="4">
                     </div>
-                    <img id="yzm-img" src="php/code_char.php" title="看不清，点击换一张">
+                    <img id="yzm-img" src="public/php/code_char.php" title="看不清，点击换一张">
                     <span class="yzm-img-click">点击换一张</span>
                 </div>
 

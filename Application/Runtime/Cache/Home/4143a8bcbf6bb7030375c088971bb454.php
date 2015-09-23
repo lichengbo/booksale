@@ -11,7 +11,7 @@
                     <li>
                         <a href="index.php?c=index&a=stock_out">退书</a>
                     </li>
-                    <li>
+                    <li >
                         <a href="index.php?c=index&a=sale">销售</a>
                     </li>
                     <li class="dropdown">
@@ -38,13 +38,12 @@
 
                 <ul class="nav navbar-nav pull-right">
                     <li class="dropdown">
-                        <a id="avatar" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            <img src="" title="头像" class="img-circle">
-
+                        <a href="#" id="infolist" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <img id="avatar" src="public/img/avatar.png" width="20px" height="20px" title="头像" class="img-circle">
                         </a>
                         <ul class="dropdown-menu animated fadeInRight">
                             <li>
-                                <a href="#">账户信息</a>
+                                <a href="index.php?c=index&a=profile">账户信息</a>
                             </li>
                             <li class="divider"></li>
                             <li>

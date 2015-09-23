@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>账户信息</title>
+  <link rel="stylesheet" type="text/css" href="public/css/bootstrap.min.css">
+  <link rel="stylesheet" href="public/css/animate.css" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="public/css/profile.css">
+</head>
+<body>
+    <div class="cotainer" style="padding-top: 100px;">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="row">
+          <label for="useravatar" class="col-md-2 control-label text-right">头像</label>
+          <div class="col-md-2">
+            <img id="useravatar" src="public/img/avatar.png" accept="image/jpg, image/jpeg, image/png" class="img-circle">
+
+            <form id="uploadform" action="index.php?c=user&a=useravatar" method="post" enctype="multipart/form-data">
+              <input id="uploadimg" type="file" name="uploadimg">
+            </form>
+          </div>
+        </div>
+
+        <div class="row">
+          <label class="col-md-2 control-label text-right">用户名</label>
+          <label id="username" class="col-md-2 control-label"></label>
+        </div>
+
+        <div class="row">
+          <label class="col-md-2 control-label text-right">邮箱</label>
+          <label id="email" class="col-md-2 control-label"></label>
+        </div>
+
+        <div class="row">
+          <label for="resetpassword1" class="col-md-2 control-label text-right">新密码</label>
+          <div class="col-md-5">
+            <input id="resetpassword1" type="password" class="form-control">
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="resetpassword2" class="col-md-2 control-label text-right">确认密码</label>
+          <div class="col-md-5">
+            <input id="resetpassword2" type="password" class="form-control">
+            <span class="help-inline help">两次密码不一致</span>
+          </div>
+          <div class="col-md-3">
+            <input id="reset" type="button" class="btn btn-primary" value="提交">
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+<script type="text/javascript" src="public/js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="public/js/jquery-form.js"></script>
+<script type="text/javascript" src="public/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="public/js/profile.js" charset="UTF-8"></script>
+</body>
+</html>

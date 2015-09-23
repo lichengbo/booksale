@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>图书销售系统-登录</title>
-    <link rel="stylesheet" type="text/css" href="public/css/bootstrap.min.css"></head>
-    <link rel="stylesheet" type="text/css" href="public/css/login.css"></head>
+    <link rel="stylesheet" type="text/css" href="public/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="public/css/login.css">
+</head>
 <body>
     <div class="container">
         <div class="col-md-6 col-md-offset-3">
@@ -30,9 +31,10 @@
                     <label for="yzm" class="col-md-3 control-label">验证码</label>
 
                     <div class="col-sm-3">
-                        <input type="text" class="form-control" id="yzm" placeholder="输入验证码" maxlength="4">
+                        <input type="text" class="form-control" id="yzm" placeholder="输入验证码" maxlength="4" required>
+                        <span class="help-inline help">验证码输入错误</span>
                     </div>
-                    <img id="yzm-img" src="php/code_char.php" title="看不清，点击换一张">
+                    <img id="yzm-img" src="public/php/code_char.php" title="看不清，点击换一张">
                     <span class="yzm-img-click">点击换一张</span>
                 </div>
 
@@ -46,7 +48,7 @@
                 
                 <div class="form-group">
                     <div class="col-md-4 col-md-offset-4">
-                        <button id="login" class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+                        <button id="login" class="btn btn-lg btn-primary btn-block" type="button">登录</button>
                     </div>
                 </div>
             </form>

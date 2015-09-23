@@ -1,4 +1,8 @@
 $(document).ready(function() {
+    $("#yzm-img").click(function(){
+        $(this).attr("src",'public/php/code_char.php?' + Math.random());
+        $("#yzm").focus();
+    });
 
     $('#register').click(function() {
         var username = $('#username').val();
@@ -6,8 +10,6 @@ $(document).ready(function() {
         var password2 = $('#password2').val();
         var email = $('#email').val();
 
-        
-        
         if (username && password) {
             $.ajax({
                 type: "POST",

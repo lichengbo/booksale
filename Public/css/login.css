@@ -39,3 +39,7 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+.help{display:none;color:#d9534f;}
+#yzm-img{width: 80px;height: 32px;cursor: pointer;}
+.yzm-img-click{line-height: 34px;}
