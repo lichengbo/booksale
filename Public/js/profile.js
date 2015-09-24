@@ -6,10 +6,10 @@ $(document).ready(function() {
         dataType: 'json',
         success: function(value) {
             if(value.status) {
+                $('#username').text(value.username);
+                $('#email').text(value.email);
                 if(value.avatar) {
                     $('#useravatar').attr("src", value.avatar);
-                    $('#username').text(value.username);
-                    $('#email').text(value.email);
                 }
             } else {
                 location.href = 'index.php?c=index&a=login';

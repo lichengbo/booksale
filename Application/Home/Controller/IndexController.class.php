@@ -13,16 +13,19 @@ class IndexController extends Controller {
 
     function login_data() {
         $username = $_POST['username'];
-        $password = $_POST['password'];
+        $password = md5($_POST['password']);
 
         $User = M('User');
         $result = $User->find($username);
 
         if($result['password'] == $password) {
-            echo 'success';
             $_SESSION['userinfo'] = $result;
+            $result1['status'] = true;
+            $this->ajaxReturn($result1);
         } else {
-            echo 'username or password error';
+            $result1['status'] = false;
+            $result1['info'] = 'login error';
+            $this->ajaxReturn($result1);
         }
     }
 
@@ -50,7 +53,7 @@ class IndexController extends Controller {
 
     function register_data() {
         $data['username'] = $_POST['username'];
-        $data['password'] = $_POST['password'];
+        $data['password'] = md5($_POST['password']);
         $data['email'] = $_POST['email'];
 
         $User = M('User');

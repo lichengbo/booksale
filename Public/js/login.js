@@ -35,9 +35,9 @@ $(document).ready(function() {
                 type: "POST",
                 url: "index.php?c=index&a=login_data",
                 data: {username: username, password: password},
-                dataType: 'text',
+                dataType: 'json',
                 success: function(value) {
-                    if(value == 'success') {
+                    if(value.status) {
                         location.href = "index.php?c=index&a=stock_in";
                         return true;
                     } else {
