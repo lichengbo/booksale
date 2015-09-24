@@ -9,10 +9,6 @@
     <link rel="stylesheet" href="public/css/animate.css" type="text/css" />
 </head>
 <body>
-    <?php
-    include 'navbar.php';
-    ?>
-
     <div class="container">
         <div class="panel panel-default" style="margin-top:80px;">
             <div class="panel-heading">库存表</div>
@@ -24,10 +20,7 @@
                             <th>书名</th>
                             <th>作者</th>
                             <th>出版社</th>
-                            <th>进价</th>
-                            <th>月销量</th>
                             <th>库存量</th>
-                            <th>月利润</th>
                         </tr>
                     </thead>
                     <tbody id="storagetable">
@@ -71,22 +64,20 @@
         });
         $.ajax({
             type: "GET",
-            url: "http://localhost/BookSale/contraller/storage.php",
+            url: "index.php?c=index&a=storage_data",
             data:{},
             dataType: "json",
             success: function(result)
             {
-                
-                //console.log(result);
                 for(var i = 0; i < result.length; i++)
                 {
-                    $('#storagetable').append($('<tr class="odd" role="row"><td class="sorting_1">'+result[i].ISBN+'</td><td>《'+result[i].name+'》</td><td>'+result[i].author+'</td><td>'+result[i].publisher+'</td><td>'+result[i].price+'</td><td>'+result[i].saled_size_monthly+'</td><td>'+result[i].storage_size+'</td><td>'+result[i].profit_monthly+'</td></tr>'));
+                    $('#storagetable').append($('<tr class="odd" role="row"><td class="sorting_1">'+result[i].isbn+'</td><td>《'+result[i].bookname+'》</td><td>'+result[i].author+'</td><td>'+result[i].publisher+'</td><td>'+result[i].storage_size+'</td></tr>'));
                 }
                 
             },
             error: function()
             {
-                alert("ajax submit error");
+                console.log("ajax submit error");
             }
 
         })

@@ -114,7 +114,9 @@ class IndexController extends Controller {
     }
 
     function storage_data() {
-        
+        $Data = M('storage');
+        $result = $Data->select();
+        $this->ajaxReturn($result);
     }
 
     function salerecord() {
@@ -123,7 +125,9 @@ class IndexController extends Controller {
     }
 
     function salerecord_data() {
-        
+        $Data = M('salerecord');
+        $result = $Data->select();
+        $this->ajaxReturn($result);
     }
 
     function stock_inrecord() {
@@ -132,7 +136,9 @@ class IndexController extends Controller {
     }
 
     function stock_inrecord_data() {
-        
+        $Data = M('stock_in_record');
+        $result = $Data->select();
+        $this->ajaxReturn($result);
     }
 
     function stock_outrecord() {
@@ -141,6 +147,8 @@ class IndexController extends Controller {
     }
 
     function stock_outrecord_data() {
-        
+        $Data = M('stock_out_record');
+        $result = $Data->select();
+        $this->ajaxReturn($result);
     }
 }

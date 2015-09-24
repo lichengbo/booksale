@@ -90,7 +90,7 @@
             {
                 for(var i = 0; i < result.length; i++)
                 {
-                    $('#storagetable').append($('<tr class="odd" role="row"><td class="sorting_1">'+result[i].isbn+'</td><td>《'+result[i].name+'》</td><td>'+result[i].author+'</td><td>'+result[i].publisher+'</td><td>'+result[i].id+'</td><td>'+result[i].supplier_name+'</td><td>'+result[i].supply_price+'</td><td><button data-toggle="modal" data-target="#myModal" class="btn btn-default">提交</button></td></tr>'));
+                    $('#storagetable').append($('<tr class="odd" role="row"><td class="sorting_1">'+result[i].isbn+'</td><td>《'+result[i].bookname+'》</td><td>'+result[i].author+'</td><td>'+result[i].publisher+'</td><td>'+result[i].id+'</td><td>'+result[i].supplier_name+'</td><td>'+result[i].supply_price+'</td><td><button data-toggle="modal" data-target="#myModal" class="btn btn-default">提交</button></td></tr>'));
                 }
 
                 var d_ISBN = 0, d_supplyID = null, d_price = 0, d_size = 0;
@@ -101,9 +101,9 @@
                     {
                     $('#buydetailbody').find('tr').remove();
 
-                        $('#buydetailbody').append($('<tr class="odd" role="row"><td class="sorting_1">ISBN</td><td>'+result[i].isbn+'</td></tr><tr><td>书名</td><td>《'+result[i].name+'》</td></tr><tr><td>作者</td><td>'+result[i].author+'</td></tr><tr><td>出版社</td><td>'+result[i].publisher+'</td></tr><tr><td>供货商ID</td><td>'+result[i].id+'</td></tr><tr><td>供货商</td><td>'+result[i].supplier_name+'</td></tr><tr><td>进价</td><td>'+result[i].supply_price+'</td></tr><tr><td>进货量</td><td><input type="number" min=0></td></tr>'));
+                        $('#buydetailbody').append($('<tr class="odd" role="row"><td class="sorting_1">ISBN</td><td>'+result[i].isbn+'</td></tr><tr><td>书名</td><td>《'+result[i].bookname+'》</td></tr><tr><td>作者</td><td>'+result[i].author+'</td></tr><tr><td>出版社</td><td>'+result[i].publisher+'</td></tr><tr><td>供货商ID</td><td>'+result[i].id+'</td></tr><tr><td>供货商</td><td>'+result[i].supplier_name+'</td></tr><tr><td>进价</td><td>'+result[i].supply_price+'</td></tr><tr><td>进货量</td><td><input type="number" min=0></td></tr>'));
 
-                        d_ISBN = result[i].ISBN, d_supplyID = result[i].id, d_price = result[i].supply_price;
+                        d_ISBN = result[i].isbn, d_supplyID = result[i].id, d_price = result[i].supply_price;
                     });
                 })
                 

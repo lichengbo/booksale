@@ -59,38 +59,28 @@
 <script type="text/javascript">
     $(document).ready(function()
     {
-       function ConvertJSONDateToJSDateObject(JSONDateString) { 
-var date = new Date(parseInt(JSONDateString.replace("/Date(", "").replace(")/", ""), 10)); 
-return date; 
-} 
         $('#mynav').find('li').each(function(i)
         {
             if(i == 3)
                 $(this).addClass('active');
          });
         $.ajax({
-            type: "GET",
-            url: "http://localhost/BookSale/contraller/stock_inrecord.php",
+            type: "POST",
+            url: "index.php?c=index&a=stock_inrecord_data",
             data:{},
             dataType: "json",
             success: function(result)
             {
-                
-                //console.log(result);
                 for(var i = 0; i < result.length; i++)
                 {
-                    $('#saleRecordBody').append($('<tr class="odd" role="row"><td class="sorting_1">'+result[i].ISBN+'</td><td>《'+result[i].book_name +'》</td><td>'+result[i].author+'</td><td>'+result[i].publisher+'</td><td>'+result[i].supplier_name+'</td><td>'+result[i].stock_in_price+'</td><td>'+result[i].stock_in_size+'</td><td>'+result[i].total_price+'</td><td>'+result[i].stock_in_date.date+'</td></tr>'));
-
-                   /* var dateObj = JSON.parse(result[i].stock_in_date);
-                    var date = new Date(dateObj.time);
-                    var dateStr = date.getYear() + '-' +date.getMonth() + '-' + date.getDate();
-                    alert(dateStr);*/
+                    var total_price = result[i].stock_in_price * result[i].stock_in_size
+                    $('#saleRecordBody').append($('<tr class="odd" role="row"><td class="sorting_1">'+result[i].isbn+'</td><td>《'+result[i].bookname +'》</td><td>'+result[i].author+'</td><td>'+result[i].publisher+'</td><td>'+result[i].supplier_name+'</td><td>'+result[i].stock_in_price+'</td><td>'+result[i].stock_in_size+'</td><td>'+total_price+'</td><td>'+result[i].stock_in_date+'</td></tr>'));
                 }
                 
             },
             error: function()
             {
-                alert("ajax submit error");
+                console.log("ajax submit error");
             }
 
         })

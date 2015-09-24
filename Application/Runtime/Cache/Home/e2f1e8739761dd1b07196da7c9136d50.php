@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>图书销售系统-注册</title>
-    <link rel="stylesheet" type="text/css" href="public/css/bootstrap.min.css"></head>
-    <link rel="stylesheet" type="text/css" href="public/css/login.css"></head>
+    <link rel="stylesheet" type="text/css" href="public/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="public/css/login.css">
+</head>
 <body>
     <div class="container">
         <div class="col-md-6 col-md-offset-3">

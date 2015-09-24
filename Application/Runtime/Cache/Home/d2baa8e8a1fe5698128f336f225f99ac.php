@@ -22,6 +22,7 @@
                             <th>销售序号</th>
                             <th>ISBN</th>
                             <th>书名</th>
+                            <th>作者</th>
                             <th>出版社</th>
                             <th>价格</th>
                             <th>退货数量</th>
@@ -65,16 +66,15 @@
 
         $.ajax({
             type: "GET",
-            url: "http://localhost/BookSale/contraller/stock_outrecord.php",
+            url: "index.php?c=index&a=stock_outrecord_data",
             data:{},
             dataType: "json",
             success: function(result)
             {
-                
-                console.log(result);
                 for(var i = 0; i < result.length; i++)
                 {
-                    $('#saleRecordBody').append($('<tr class="odd" role="row"><td class="sorting_1">'+result[i].id+'</td><td>'+result[i].sale_id+'</td><td>'+result[i].ISBN+'</td><td>《'+result[i].book_name+'》</td><td>'+result[i].publisher+'</td><td>'+result[i].price+'</td><td>'+result[i].stock_out_size+'</td><td>'+result[i].total_price+'</td><td>'+result[i].stock_out_date.date+'</td></tr>'));
+                    var total_price = result[i].stock_out_price * result[i].stock_out_size;
+                    $('#saleRecordBody').append($('<tr class="odd" role="row"><td class="sorting_1">'+result[i].id+'</td><td>'+result[i].sale_id+'</td><td>'+result[i].isbn+'</td><td>《'+result[i].bookname+'》</td><td>'+result[i].author+'</td><td>'+result[i].publisher+'</td><td>'+result[i].stock_out_price+'</td><td>'+result[i].stock_out_size+'</td><td>'+total_price+'</td><td>'+result[i].stock_out_date+'</td></tr>'));
                 }
                 
             },

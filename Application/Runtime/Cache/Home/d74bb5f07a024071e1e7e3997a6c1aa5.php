@@ -67,17 +67,17 @@ function ChangeDateFormat(jsonDate) {
                 $(this).addClass('active');
         });
         $.ajax({
-            type: "GET",
-            url: "http://localhost/BookSale/contraller/saleRecord.php",
+            type: "POST",
+            url: "index.php?c=index&a=salerecord_data",
             data:{},
             dataType: "json",
             success: function(result)
             {
-                
-                console.log(result);
+                var total_price = 0;
                 for(var i = 0; i < result.length; i++)
                 {
-                    $('#saleRecordBody').append($('<tr class="odd" role="row"><td>'+result[i].id+'</td><td>'+result[i].ISBN+'</td><td class="sorting_1">《'+result[i].name+'》</td><td>'+result[i].author+'</td><td>'+result[i].publisher+'</td><td>'+result[i].price+'</td><td>'+result[i].sale_size+'</td><td>'+result[i].total_price+'</td><td>'+result[i].sale_date.date+'</td></tr>'));
+                    total_price = result[i].sale_prize * result[i].sale_size;
+                    $('#saleRecordBody').append($('<tr class="odd" role="row"><td>'+result[i].id+'</td><td>'+result[i].isbn+'</td><td class="sorting_1">《'+result[i].bookname+'》</td><td>'+result[i].author+'</td><td>'+result[i].publisher+'</td><td>'+result[i].sale_prize+'</td><td>'+result[i].sale_size+'</td><td>'+total_price+'</td><td>'+result[i].sale_date+'</td></tr>'));
                 }
             },
             error: function()
