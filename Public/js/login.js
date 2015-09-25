@@ -1,4 +1,7 @@
 $(document).ready(function() {
+    // 获取 cookie 记录的用户名和密码
+    $('#username').val($.cookie('username'));
+    $('#password').val($.cookie('password'));
     // 表单验证
     $yzmistrue = false;
 
@@ -29,12 +32,13 @@ $(document).ready(function() {
     $('#login').click(function() {
         var username = $('#username').val();
         var password = $('#password').val();
+        var isremember = $('#rememberme').prop("checked");
         
         if ($yzmistrue && username && password) {
             $.ajax({
                 type: "POST",
                 url: "index.php?c=index&a=login_data",
-                data: {username: username, password: password},
+                data: {username: username, password: password, isremember: isremember},
                 dataType: 'json',
                 success: function(value) {
                     if(value.status) {
@@ -47,7 +51,7 @@ $(document).ready(function() {
                     }
                 },
                 error: function() {
-
+                    console.log('login ajax submit error');
                 }
             });
     

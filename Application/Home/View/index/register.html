@@ -46,6 +46,7 @@
 
                     <div class="col-sm-3">
                         <input type="text" class="form-control" id="yzm" placeholder="输入验证码" maxlength="4">
+                        <span class="help-inline help">验证码输入错误</span>
                     </div>
                     <img id="yzm-img" src="public/php/code_char.php" title="看不清，点击换一张">
                     <span class="yzm-img-click">点击换一张</span>
@@ -54,14 +55,14 @@
                 <div class="form-group">
                     <div class="checkbox col-md-offset-3">
                         <label>
-                            <input type="checkbox" value="remember-me">同意网站策略 &nbsp;|&nbsp; <a href="index.php?c=index&a=login" style="text-decoration: none;">登录</a>
+                            <input id="isagree" type="checkbox" value="remember-me">同意网站策略 &nbsp;|&nbsp; <a href="index.php?c=index&a=login" style="text-decoration: none;">登录</a>
                         </label>
                     </div>
                 </div>
                 
                 <div class="form-group">
                     <div class="col-md-4 col-md-offset-4">
-                        <button id="register" class="btn btn-lg btn-primary btn-block" type="submit">注册</button>
+                        <button id="register" class="btn btn-lg btn-primary btn-block" type="button">注册</button>
                     </div>
                 </div>
             </form>

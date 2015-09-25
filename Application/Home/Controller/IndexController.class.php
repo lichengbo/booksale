@@ -13,12 +13,17 @@ class IndexController extends Controller {
 
     function login_data() {
         $username = $_POST['username'];
-        $password = md5($_POST['password']);
+        $password = $_POST['password'];
+        $isremember = $_POST['isremember'];
 
         $User = M('User');
         $result = $User->find($username);
 
-        if($result['password'] == $password) {
+        if($result['password'] == md5($password)) {
+            if($isremember == 'true') {
+                setcookie('username', $username, time() + 3600);
+                setcookie('password', $password, time() + 3600);
+            }
             $_SESSION['userinfo'] = $result;
             $result1['status'] = true;
             $this->ajaxReturn($result1);
@@ -30,7 +35,7 @@ class IndexController extends Controller {
     }
 
     function checkyzm() {
-        $value = $_POST['value'];
+        $value = strtolower($_POST['value']);
         if($value == strtolower($_SESSION['helloweba_char'])) {
             $result['status'] = true;
             $result['info'] = '验证码正确';
@@ -42,9 +47,24 @@ class IndexController extends Controller {
         }
     }
 
+    function remember_login() {
+        if($_COOKIE['username']) {
+            $result['status'] = true;
+            $result['username'] = $_COOKIE['username'];
+            $result['password'] = $_COOKIE['password'];
+            $this->ajaxReturn($result);
+        } else {
+            $result['status'] = false;
+            $result['info'] = 'cookie 失效';
+            $this->ajaxReturn($result);
+        }
+    }
+
     function logout() {
         session_unset();
         session_destroy();
+        setcookie('username','',time()-3600);
+        setcookie('password','',time()-3600);
     }
 
     function register() {

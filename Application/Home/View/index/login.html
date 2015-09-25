@@ -41,7 +41,7 @@
                 <div class="form-group">
                     <div class="checkbox col-md-offset-3">
                         <label>
-                            <input type="checkbox" value="remember-me">记住登录状态 &nbsp;|&nbsp; <a href="index.php?c=index&a=register" style="text-decoration: none;">注册</a>
+                            <input id="rememberme" type="checkbox" value="remember-me">记住密码 &nbsp;|&nbsp; <a href="index.php?c=index&a=register" style="text-decoration: none;">注册</a>
                         </label>
                     </div>
                 </div>
@@ -57,5 +57,6 @@
 
 <script type="text/javascript" src="public/js/jquery-1.11.2.min.js"></script>
 <script type="text/javascript" src="public/js/login.js"></script>
+<script type="text/javascript" src="public/js/jquery.cookie.js"></script>
 </body>
 </html>
