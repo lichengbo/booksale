@@ -1,5 +1,6 @@
 <?php
 namespace Home\Controller;
+use Org\Util\Date;
 use Think\Controller;
 class IndexController extends Controller {
     public function index(){
@@ -112,6 +113,41 @@ class IndexController extends Controller {
         $result = $Data->select();
 
         $this->ajaxReturn($result);
+    }
+
+    function stock_in_submit() {
+        $data['isbn'] = $_POST['isbn'];
+        $data['bookname'] = $_POST['bookname'];
+        $data['author'] = $_POST['author'];
+        $data['publisher'] = $_POST['publisher'];
+        $data['supplier_name'] = $_POST['supplier_name'];
+        $data['stock_in_price'] = $_POST['supplyPrice'];
+        $data['stock_in_size'] = $_POST['stockin_Size'];
+        $data['stock_in_date'] = date("Y-m-d H:i:s");
+
+
+        $Stock_in_record = M('Stock_in_record');
+        if($Stock_in_record->add($data)) {
+            $storage = M('storage');
+            $stock_in = M('stock_in');
+            $find['isbn'] = $data['isbn'];
+            $storage->storage_size = (int)$storage->where($find)->getField('storage_size') + (int)$data['stock_in_size'];
+            $stock_in->supply_size = (int)$stock_in->where($find)->getField('supply_size') - (int)$data['stock_in_size'];
+            if($storage->where($find)->save() && $stock_in->where($find)->save()) {
+                $result['status'] = true;
+                $result['info'] = '进货成功';
+                $this->ajaxReturn($result);
+            } else {
+                $result['status'] = false;
+                $result['info'] = '进货失败';
+                $this->ajaxReturn($result);
+            }
+        }
+
+
+
+
+
     }
 
     function stock_out() {

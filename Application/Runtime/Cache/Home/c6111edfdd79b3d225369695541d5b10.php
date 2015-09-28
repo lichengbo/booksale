@@ -19,6 +19,7 @@
                 <table role="grid" id="DataTables_Table_1"class="table table-striped m-b-none">
                     <thead>
                         <tr role="row">
+                            <th>进货ID</th>
                             <th>ISBN</th>
                             <th>书名</th>
                             <th>作者</th>
@@ -73,7 +74,7 @@
                 for(var i = 0; i < result.length; i++)
                 {
                     var total_price = result[i].stock_in_price * result[i].stock_in_size
-                    $('#saleRecordBody').append($('<tr class="odd" role="row"><td class="sorting_1">'+result[i].isbn+'</td><td>《'+result[i].bookname +'》</td><td>'+result[i].author+'</td><td>'+result[i].publisher+'</td><td>'+result[i].supplier_name+'</td><td>'+result[i].stock_in_price+'</td><td>'+result[i].stock_in_size+'</td><td>'+total_price+'</td><td>'+result[i].stock_in_date+'</td></tr>'));
+                    $('#saleRecordBody').append($('<tr class="odd" role="row"><td class="sorting_1">'+result[i].stock_in_id+'</td><td>'+result[i].isbn +'</td><td>《'+result[i].bookname +'》</td><td>'+result[i].author+'</td><td>'+result[i].publisher+'</td><td>'+result[i].supplier_name+'</td><td>'+result[i].stock_in_price+'</td><td>'+result[i].stock_in_size+'</td><td>'+total_price+'</td><td>'+result[i].stock_in_date+'</td></tr>'));
                 }
                 
             },

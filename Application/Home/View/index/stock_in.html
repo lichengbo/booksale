@@ -25,6 +25,7 @@
                                 <th>供货商ID</th>
                                 <th>供货商</th>
                                 <th>报价</th>
+                                <th>供货量</th>
                                 <th>确认进货</th>
                             </tr>
                         </thead>
@@ -90,7 +91,7 @@
             {
                 for(var i = 0; i < result.length; i++)
                 {
-                    $('#storagetable').append($('<tr class="odd" role="row"><td class="sorting_1">'+result[i].isbn+'</td><td>《'+result[i].bookname+'》</td><td>'+result[i].author+'</td><td>'+result[i].publisher+'</td><td>'+result[i].id+'</td><td>'+result[i].supplier_name+'</td><td>'+result[i].supply_price+'</td><td><button data-toggle="modal" data-target="#myModal" class="btn btn-default">提交</button></td></tr>'));
+                    $('#storagetable').append($('<tr class="odd" role="row"><td class="sorting_1">'+result[i].isbn+'</td><td>《'+result[i].bookname+'》</td><td>'+result[i].author+'</td><td>'+result[i].publisher+'</td><td>'+result[i].id+'</td><td>'+result[i].supplier_name+'</td><td>'+result[i].supply_price+'</td><td>'+result[i].supply_size+'</td><td><button data-toggle="modal" data-target="#myModal" class="btn btn-default">提交</button></td></tr>'));
                 }
 
                 var d_ISBN = 0, d_supplyID = null, d_price = 0, d_size = 0;
@@ -99,11 +100,11 @@
                 {
                     $(this).click(function()
                     {
-                    $('#buydetailbody').find('tr').remove();
+                        $('#buydetailbody').find('tr').remove();
 
-                        $('#buydetailbody').append($('<tr class="odd" role="row"><td class="sorting_1">ISBN</td><td>'+result[i].isbn+'</td></tr><tr><td>书名</td><td>《'+result[i].bookname+'》</td></tr><tr><td>作者</td><td>'+result[i].author+'</td></tr><tr><td>出版社</td><td>'+result[i].publisher+'</td></tr><tr><td>供货商ID</td><td>'+result[i].id+'</td></tr><tr><td>供货商</td><td>'+result[i].supplier_name+'</td></tr><tr><td>进价</td><td>'+result[i].supply_price+'</td></tr><tr><td>进货量</td><td><input type="number" min=0></td></tr>'));
+                        $('#buydetailbody').append($('<tr class="odd" role="row"><td class="sorting_1">ISBN</td><td>'+result[i].isbn+'</td></tr><tr><td>书名</td><td>《'+result[i].bookname+'》</td></tr><tr><td>作者</td><td>'+result[i].author+'</td></tr><tr><td>出版社</td><td>'+result[i].publisher+'</td></tr><tr><td>供货商ID</td><td>'+result[i].id+'</td></tr><tr><td>供货商</td><td>'+result[i].supplier_name+'</td></tr><tr><td>进价</td><td>'+result[i].supply_price+'</td></tr><tr><td>供货量</td><td>'+result[i].supply_size+'</td></tr><tr><td>进货量</td><td><input type="number" min=0></td></tr>'));
 
-                        d_ISBN = result[i].isbn, d_supplyID = result[i].id, d_price = result[i].supply_price;
+                        d_ISBN = result[i].isbn, d_bookname = result[i].bookname, d_author = result[i].author, d_publisher = result[i].publisher, d_supplier_name = result[i].supplier_name, d_supplyPrice = result[i].supply_price, d_maxsize = parseInt(result[i].supply_size);
                     });
                 })
                 
@@ -111,36 +112,35 @@
 
                 $('#stockInSubmit').click(function()
                 {
-                    d_size = $('#buydetailbody').find('input').val();
-                    //alert(d_ISBN+ ' ' +d_supplyID+ ' '+d_price+ ' ' +d_size);
-                    if(d_size)
-                    {                      
+                    d_size = parseInt($('#buydetailbody').find('input').val());
+                    if(d_size > d_maxsize) {
+                        alert('供应量不足');
+                    }
+                    if(d_size > 0 && d_size <= d_maxsize)
+                    {
                         $.ajax({
-                            type: "GET",
-                            url: "http://localhost/BookSale/contraller/stock_out_submit.php",
-                            data:{ISBN: d_ISBN,supplyID:d_supplyID, price:d_price, size:d_size},
-                            dataType: "text",
+                            type: "POST",
+                            url: "index.php?c=index&a=stock_in_submit",
+                            data:{isbn: d_ISBN, bookname: d_bookname,author: d_author, publisher: d_publisher, supplier_name:d_supplier_name, supplyPrice:d_supplyPrice, stockin_Size:d_size},
+                            dataType: "json",
                             success: function(result)
                             {
-                                if(result == '进货成功')
+                                if(result.status)
                                 {
-                                    alert(result)
+                                    alert(result.info);
                                     $("#myModal").modal('hide');
-                                }
-                                else
-                                {
-                                    alert(result);
+                                } else {
+                                    alert(result.info);
                                 }
                             },
-                            error: function(result)
+                            error: function()
                             {
-                                alert(result);
+                                console.log('sotck_in ajax submit error');
                             }
                         });
                     }
-                    else
-                    {
-                        alert('购买数量必须大于0')
+                    if(d_size <= 0) {
+                        alert('进货数量必须大于0')
                     }
                     
                 });
