@@ -69,11 +69,18 @@
             dataType: "json",
             success: function(result)
             {
-                for(var i = 0; i < result.length; i++)
-                {
-                    $('#storagetable').append($('<tr class="odd" role="row"><td class="sorting_1">'+result[i].isbn+'</td><td>《'+result[i].bookname+'》</td><td>'+result[i].author+'</td><td>'+result[i].publisher+'</td><td>'+result[i].storage_size+'</td></tr>'));
+                if(result.status) {
+                    for(var i = 0; i < result.data.length; i++)
+                    {
+                        $('#storagetable').append($('<tr class="odd" role="row"><td class="sorting_1">'+result.data[i].isbn+'</td><td>《'+result.data[i].bookname+'》</td><td>'+result.data[i].author+'</td><td>'+result.data[i].publisher+'</td><td>'+result.data[i].storage_size+'</td></tr>'));
+                    }
+                } else {
+                    alert(result.info);
+                    if(result.info == '您没有该操作权限') {
+                        location.href = 'index.php?c=index&a=sale';
+                    }
                 }
-                
+
             },
             error: function()
             {

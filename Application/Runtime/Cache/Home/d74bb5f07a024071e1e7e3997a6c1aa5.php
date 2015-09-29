@@ -53,17 +53,17 @@
 <script type="text/javascript" src="public/js/jquery-1.11.2.min.js"></script>
 <script type="text/javascript" src="public/js/bootstrap.min.js"></script> 
 <script type="text/javascript">
-function ChangeDateFormat(jsonDate) {
+/*function ChangeDateFormat(jsonDate) {
     var date = new Date(parseInt(jsonDate.replace("/Date(", "").replace(")/", ""), 10));
     var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
     var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
     return date.getFullYear() + "-" + month + "-" + currentDate;
-}
+}*/
     $(document).ready(function()
     {
         $('#mynav').find('li').each(function(i)
         {
-            if(i == 3)
+            if(i == 4)
                 $(this).addClass('active');
         });
         $.ajax({
@@ -73,12 +73,20 @@ function ChangeDateFormat(jsonDate) {
             dataType: "json",
             success: function(result)
             {
-                var total_price = 0;
-                for(var i = 0; i < result.length; i++)
-                {
-                    total_price = result[i].sale_prize * result[i].sale_size;
-                    $('#saleRecordBody').append($('<tr class="odd" role="row"><td>'+result[i].id+'</td><td>'+result[i].isbn+'</td><td class="sorting_1">《'+result[i].bookname+'》</td><td>'+result[i].author+'</td><td>'+result[i].publisher+'</td><td>'+result[i].sale_prize+'</td><td>'+result[i].sale_size+'</td><td>'+total_price+'</td><td>'+result[i].sale_date+'</td></tr>'));
+                if(result.status) {
+                    var total_price = 0;
+                    for(var i = 0; i < result.data.length; i++)
+                    {
+                        total_price = result.data[i].sale_prize * result.data[i].sale_size;
+                        $('#saleRecordBody').append($('<tr class="odd" role="row"><td>'+result.data[i].id+'</td><td>'+result.data[i].isbn+'</td><td class="sorting_1">《'+result.data[i].bookname+'》</td><td>'+result.data[i].author+'</td><td>'+result.data[i].publisher+'</td><td>'+result.data[i].sale_prize+'</td><td>'+result.data[i].sale_size+'</td><td>'+total_price+'</td><td>'+result.data[i].sale_date+'</td></tr>'));
+                    }
+                } else {
+                    alert(result.info);
+                    if(result.info == '您没有该操作权限') {
+                        location.href = 'index.php?c=index&a=sale';
+                    }
                 }
+
             },
             error: function()
             {

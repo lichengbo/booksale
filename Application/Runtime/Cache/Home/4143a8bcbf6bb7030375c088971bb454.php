@@ -8,18 +8,18 @@
                     <li>
                         <a href="index.php?c=index&a=stock_in">进书</a>
                     </li>
+                    <li >
+                        <a href="index.php?c=index&a=sale">购书</a>
+                    </li>
                     <li>
                         <a href="index.php?c=index&a=stock_out">退书</a>
                     </li>
-                    <li >
-                        <a href="index.php?c=index&a=sale">销售</a>
-                    </li>
-                    <li class="dropdown">
+                    <!--<li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             统计
                             <span class="caret"></span>
                         </a>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu">-->
                             <li>
                                 <a href="index.php?c=index&a=storage">库存表</a>
                             </li>
@@ -32,7 +32,7 @@
                             <li>
                                 <a href="index.php?c=index&a=stock_outrecord">退货记录</a>
                             </li>
-                        </ul>
+                        <!--</ul>-->
                     </li>
                 </ul>
 
@@ -41,9 +41,12 @@
                         <a href="#" id="infolist" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <img id="avatar" src="public/img/avatar.png" width="20px" height="20px" title="头像" class="img-circle">
                         </a>
-                        <ul class="dropdown-menu animated fadeInRight">
+                        <ul id="avatarlist" class="dropdown-menu animated fadeInRight">
                             <li>
                                 <a href="index.php?c=index&a=profile">账户信息</a>
+                            </li>
+                            <li>
+                                <a href="index.php?c=user&a=userlist">用户列表</a>
                             </li>
                             <li class="divider"></li>
                             <li>

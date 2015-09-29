@@ -74,7 +74,7 @@
 <script type="text/javascript">
     $('#mynav').find('li').each(function(i)
     {
-        if(i == 2)
+        if(i == 1)
             $(this).addClass('active');
     });
 

@@ -40,9 +40,13 @@ $(document).ready(function() {
                 url: "index.php?c=index&a=login_data",
                 data: {username: username, password: password, isremember: isremember},
                 dataType: 'json',
-                success: function(value) {
-                    if(value.status) {
-                        location.href = "index.php?c=index&a=stock_in";
+                success: function(result) {
+                    if(result.status) {
+                        if(result.user_type != "2") {
+                            location.href = "index.php?c=index&a=stock_in";
+                        } else {
+                            location.href = "index.php?c=index&a=sale";
+                        }
                         return true;
                     } else {
                         alert('用户名或密码错误');

@@ -27,6 +27,7 @@ class IndexController extends Controller {
             }
             $_SESSION['userinfo'] = $result;
             $result1['status'] = true;
+            $result1['user_type'] = $result['user_type'];
             $this->ajaxReturn($result1);
         } else {
             $result1['status'] = false;
@@ -109,11 +110,25 @@ class IndexController extends Controller {
     }
 
     function stock_in_data() {
-        $Data = M('Stock_in');
-        $result = $Data->select();
+        if($_SESSION['userinfo']['user_type'] == "2") {
+            $result['status'] = false;
+            $result['info'] = '您没有该操作权限';
+            $this->ajaxReturn($result);
+        } else {
+            $Data = M('stock_in');
+            $result['data'] = $Data->select();
 
-        $this->ajaxReturn($result);
-    }
+            if($result['data']) {
+                $result['status'] = true;
+                $result['info'] = '成功';
+                $this->ajaxReturn($result);
+            } else {
+                $result['status'] = false;
+                $result['info'] = '数据为空';
+                $this->ajaxReturn($result);
+            }
+        }
+     }
 
     function stock_in_submit() {
         $data['isbn'] = $_POST['isbn'];
@@ -143,11 +158,6 @@ class IndexController extends Controller {
                 $this->ajaxReturn($result);
             }
         }
-
-
-
-
-
     }
 
     function stock_out() {
@@ -173,9 +183,24 @@ class IndexController extends Controller {
     }
 
     function storage_data() {
-        $Data = M('storage');
-        $result = $Data->select();
-        $this->ajaxReturn($result);
+        if($_SESSION['userinfo']['user_type'] == "2") {
+            $result['status'] = false;
+            $result['info'] = '您没有该操作权限';
+            $this->ajaxReturn($result);
+        } else {
+            $Data = M('storage');
+            $result['data'] = $Data->select();
+
+            if($result['data']) {
+                $result['status'] = true;
+                $result['info'] = '成功';
+                $this->ajaxReturn($result);
+            } else {
+                $result['status'] = false;
+                $result['info'] = '数据为空';
+                $this->ajaxReturn($result);
+            }
+        }
     }
 
     function salerecord() {
@@ -184,9 +209,24 @@ class IndexController extends Controller {
     }
 
     function salerecord_data() {
-        $Data = M('salerecord');
-        $result = $Data->select();
-        $this->ajaxReturn($result);
+        if($_SESSION['userinfo']['user_type'] == "2") {
+            $result['status'] = false;
+            $result['info'] = '您没有该操作权限';
+            $this->ajaxReturn($result);
+        } else {
+            $Data = M('salerecord');
+            $result['data'] = $Data->select();
+
+            if($result['data']) {
+                $result['status'] = true;
+                $result['info'] = '成功';
+                $this->ajaxReturn($result);
+            } else {
+                $result['status'] = false;
+                $result['info'] = '数据为空';
+                $this->ajaxReturn($result);
+            }
+        }
     }
 
     function stock_inrecord() {
@@ -195,9 +235,24 @@ class IndexController extends Controller {
     }
 
     function stock_inrecord_data() {
-        $Data = M('stock_in_record');
-        $result = $Data->select();
-        $this->ajaxReturn($result);
+        if($_SESSION['userinfo']['user_type'] == "2") {
+            $result['status'] = false;
+            $result['info'] = '您没有该操作权限';
+            $this->ajaxReturn($result);
+        } else {
+            $Data = M('stock_in_record');
+            $result['data'] = $Data->select();
+
+            if($result['data']) {
+                $result['status'] = true;
+                $result['info'] = '成功';
+                $this->ajaxReturn($result);
+            } else {
+                $result['status'] = false;
+                $result['info'] = '数据为空';
+                $this->ajaxReturn($result);
+            }
+        }
     }
 
     function stock_outrecord() {
@@ -206,8 +261,24 @@ class IndexController extends Controller {
     }
 
     function stock_outrecord_data() {
-        $Data = M('stock_out_record');
-        $result = $Data->select();
-        $this->ajaxReturn($result);
+        if($_SESSION['userinfo']['user_type'] == "2") {
+            $result['status'] = false;
+            $result['info'] = '您没有该操作权限';
+            $this->ajaxReturn($result);
+        } else {
+            $Data = M('stock_out_record');
+            $result['data'] = $Data->select();
+
+            if($result['data']) {
+                $result['status'] = true;
+                $result['info'] = '成功';
+                $this->ajaxReturn($result);
+            } else {
+                $result['status'] = false;
+                $result['info'] = '数据为空';
+                $this->ajaxReturn($result);
+            }
+        }
+
     }
 }

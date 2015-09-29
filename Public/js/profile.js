@@ -11,6 +11,14 @@ $(document).ready(function() {
                 if(value.avatar) {
                     $('#useravatar').attr("src", value.avatar);
                 }
+
+                if(value.user_type == "0") {
+                    $('#user_type').text('超级管理员');
+                } else if (value.user_type == "1") {
+                    $('#user_type').text('管理员');
+                } else {
+                    $('#user_type').text('普通用户');
+                }
             } else {
                 location.href = 'index.php?c=index&a=login';
             }
