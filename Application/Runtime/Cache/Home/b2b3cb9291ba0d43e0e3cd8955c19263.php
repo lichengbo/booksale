@@ -15,7 +15,7 @@
                     书籍供应表
                 </div>
                 <div class="table-responsive">
-                    <table role="grid" id="DataTables_Table_1"class="table table-striped m-b-none">
+                    <table role="grid" id="DataTables_Table_1"class="table table-striped table-bordered table-hover m-b-none">
                         <thead>
                             <tr role="row">
                                 <th>ISBN</th>
@@ -60,7 +60,7 @@
                 </div>
           </div>
           <div class="modal-footer">
-            <button type="button" id="stockInSubmit" class="btn btn-primary">进货</button>
+            <button type="button" id="stockInSubmit" class="btn btn-success">进货</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
           </div>
         </div>
@@ -92,7 +92,7 @@
                 if(result.status) {
                     for(var i = 0; i < result.data.length; i++)
                     {
-                        $('#storagetable').append($('<tr class="odd" role="row"><td class="sorting_1">'+result.data[i].isbn+'</td><td>《'+result.data[i].bookname+'》</td><td>'+result.data[i].author+'</td><td>'+result.data[i].publisher+'</td><td>'+result.data[i].id+'</td><td>'+result.data[i].supplier_name+'</td><td>'+result.data[i].supply_price+'</td><td>'+result.data[i].supply_size+'</td><td><button data-toggle="modal" data-target="#myModal" class="btn btn-default">提交</button></td></tr>'));
+                        $('#storagetable').append($('<tr class="odd" role="row"><td class="sorting_1">'+result.data[i].isbn+'</td><td>《'+result.data[i].bookname+'》</td><td>'+result.data[i].author+'</td><td>'+result.data[i].publisher+'</td><td>'+result.data[i].id+'</td><td>'+result.data[i].supplier_name+'</td><td>'+result.data[i].supply_price+'</td><td>'+result.data[i].supply_size+'</td><td><button data-toggle="modal" data-target="#myModal" class="btn btn-primary">提交</button></td></tr>'));
                     }
 
                     var d_ISBN = 0, d_supplyID = null, d_price = 0, d_size = 0;

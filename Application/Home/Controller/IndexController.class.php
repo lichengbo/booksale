@@ -104,6 +104,32 @@ class IndexController extends Controller {
         $this->display('userinfo');
     }
 
+    function userlist() {
+        $this->display('navbar');
+        $this->display('userlist');
+    }
+
+    function userlist_data() {
+        if($_SESSION['userinfo']['user_type'] == "2") {
+            $result['status'] = false;
+            $result['info'] = '您没有该操作权限';
+            $this->ajaxReturn($result);
+        } else {
+            $Data = M('user');
+            $result['data'] = $Data->select();
+
+            if($result['data']) {
+                $result['status'] = true;
+                $result['info'] = '成功';
+                $this->ajaxReturn($result);
+            } else {
+                $result['status'] = false;
+                $result['info'] = '数据为空';
+                $this->ajaxReturn($result);
+            }
+        }
+    }
+
     function stock_in() {
         $this->display('navbar');
         $this->display();

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户列表</title>
+    <link rel="stylesheet" type="text/css" href="public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="public/css/animate.css" type="text/css" />
+</head>
+<body>
+    <div class="container" style="padding-top: 80px;">
+        <div class="panel panel-default">
+            <div class="panel-heading">用户列表</div>
+            <div class="table-responsive">
+                <table role="grid" id="DataTables_Table_1"class="table table-striped table-bordered table-hover">
+                    <thead>
+                    <tr role="row">
+                        <th>用户ID</th>
+                        <th>用户名</th>
+                        <th>密码</th>
+                        <th>邮箱</th>
+                        <th>权限</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="userListBody">
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+<script type="text/javascript" src="public/js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="public/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $.ajax({
+            type: 'POST',
+            url: 'index.php?c=index&a=userlist_data',
+            data: {},
+            dataType: 'json',
+            success: function(result) {
+                if(result.status) {
+                    for(var i = 0; i < result.data.length; i++)
+                    {
+                        var total_price = result.data[i].stock_out_price * result.data[i].stock_out_size;
+                        $('#userListBody').append($('<tr class="odd" role="row"><td class="sorting_1">'+result.data[i].uid+'</td><td>'+result.data[i].username+'</td><td>'+result.data[i].password+'</td><td>'+result.data[i].email+'</td><td>'+result.data[i].user_type+'</td><td><button class="btn btn-primary">编辑</button><button class="btn btn-danger" style="margin-left: 10px">删除</button></td></tr>'));
+                    }
+                }
+            },
+            error: function() {
+                console.log('user list ajax response error')
+            }
+        })
+    })
+</script>
+</body>
+</html>

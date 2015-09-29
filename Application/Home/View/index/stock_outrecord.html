@@ -9,14 +9,11 @@
     <link rel="stylesheet" href="public/css/animate.css" type="text/css" />
 </head>
 <body>
-    <?php
-    include 'navbar.php';
-    ?>
     <div class="container">
         <div class="panel panel-default" style="margin-top:80px;">
             <div class="panel-heading">退货记录表</div>
             <div class="table-responsive">
-                <table role="grid" id="DataTables_Table_1"class="table table-striped m-b-none">
+                <table role="grid" id="DataTables_Table_1"class="table table-striped table-bordered table-hover m-b-none">
                     <thead>
                         <tr role="row">
                             <th>退书序号</th>
@@ -66,7 +63,7 @@
         });
 
         $.ajax({
-            type: "GET",
+            type: "POST",
             url: "index.php?c=index&a=stock_outrecord_data",
             data:{},
             dataType: "json",

@@ -46,7 +46,7 @@
                                 <a href="index.php?c=index&a=profile">账户信息</a>
                             </li>
                             <li>
-                                <a href="index.php?c=user&a=userlist">用户列表</a>
+                                <a href="index.php?c=index&a=userlist">用户列表</a>
                             </li>
                             <li class="divider"></li>
                             <li>

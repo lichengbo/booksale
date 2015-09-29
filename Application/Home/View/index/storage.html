@@ -13,7 +13,7 @@
         <div class="panel panel-default" style="margin-top:80px;">
             <div class="panel-heading">库存表</div>
             <div class="table-responsive">
-                <table role="grid" id="DataTables_Table_1"class="table table-striped m-b-none">
+                <table role="grid" id="DataTables_Table_1"class="table table-striped table-bordered table-hover m-b-none">
                     <thead>
                         <tr role="row">
                             <th>ISBN</th>
