@@ -16,9 +16,10 @@ class IndexController extends Controller {
         $username = $_POST['username'];
         $password = $_POST['password'];
         $isremember = $_POST['isremember'];
+        $find['username'] = $username;
 
         $User = M('User');
-        $result = $User->find($username);
+        $result = $User->where($find)->find();
 
         if($result['password'] == md5($password)) {
             if($isremember == 'true') {
@@ -31,7 +32,7 @@ class IndexController extends Controller {
             $this->ajaxReturn($result1);
         } else {
             $result1['status'] = false;
-            $result1['info'] = 'login error';
+            $result1['info'] = '用户名或密码错误';
             $this->ajaxReturn($result1);
         }
     }
@@ -110,11 +111,7 @@ class IndexController extends Controller {
     }
 
     function userlist_data() {
-        if($_SESSION['userinfo']['user_type'] == "2") {
-            $result['status'] = false;
-            $result['info'] = '您没有该操作权限';
-            $this->ajaxReturn($result);
-        } else {
+        if($_SESSION['userinfo']['user_type'] == "0") {
             $Data = M('user');
             $result['data'] = $Data->select();
 
@@ -127,6 +124,11 @@ class IndexController extends Controller {
                 $result['info'] = '数据为空';
                 $this->ajaxReturn($result);
             }
+        } else {
+            $result['status'] = false;
+            $result['info'] = '您没有该操作权限';
+            $result['user_type'] = $_SESSION['userinfo']['user_type'];
+            $this->ajaxReturn($result);
         }
     }
 

@@ -43,8 +43,14 @@
                 if(result.status) {
                     for(var i = 0; i < result.data.length; i++)
                     {
-                        var total_price = result.data[i].stock_out_price * result.data[i].stock_out_size;
                         $('#userListBody').append($('<tr class="odd" role="row"><td class="sorting_1">'+result.data[i].uid+'</td><td>'+result.data[i].username+'</td><td>'+result.data[i].password+'</td><td>'+result.data[i].email+'</td><td>'+result.data[i].user_type+'</td><td><button class="btn btn-primary">编辑</button><button class="btn btn-danger" style="margin-left: 10px">删除</button></td></tr>'));
+                    }
+                } else {
+                    alert(result.info);
+                    if(result.user_type == '1') {
+                        location.href = 'index.php?c=index&a=stock_in';
+                    } else if (result.user_type == '2'){
+                        location.href = 'index.php?c=index&a=sale';
                     }
                 }
             },
