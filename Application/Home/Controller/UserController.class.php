@@ -2,6 +2,7 @@
 namespace Home\Controller;
 use Think\Controller;
 class UserController extends Controller {
+    // 检验用户登录状态
     function userinfo() {
         $userinfo = $_SESSION['userinfo'];
         if($userinfo) {
@@ -32,6 +33,7 @@ class UserController extends Controller {
         }
     }
 
+    // user avatar upload function
     function useravatar() {
         $filename = $_FILES['uploadimg']['name'];
         $type = $_FILES['uploadimg']['type'];
@@ -147,5 +149,14 @@ class UserController extends Controller {
         }
     }
 
+    // admin editor user function
+    function editoruser() {
+
+    }
+
+    // admin delete user function
+    function deleteuser() {
+
+    }
 }
 ?>

@@ -53,11 +53,37 @@
                         location.href = 'index.php?c=index&a=sale';
                     }
                 }
+
+                $('#userListBody').find('button').each(function(i) {
+                    $(this).click(function() {
+                        if(i % 2) {
+                            // delete button id = parseInt(i / 2)
+                            var isdelete = confirm('数据删除后不能恢复！确定删除');
+                            if(isdelete) {
+                                $.ajax({
+                                    type: 'POST',
+                                    url: 'index.php?c=user&a=deleteuser',
+                                    data: {uid: parseInt(i / 2)},
+                                    dataType: 'json',
+                                    success: function(result) {
+                                        alert(result.info);
+                                    },
+                                    error: function() {
+                                        console.log('delete user ajax error')
+                                    }
+                                })
+                            }
+
+                        } else {
+                            location.href = 'index.php?c=user&a=editoruser&uid=' + (i / 2);
+                        }
+                    });
+                })
             },
             error: function() {
                 console.log('user list ajax response error')
             }
-        })
+        });
     })
 </script>
 </body>
