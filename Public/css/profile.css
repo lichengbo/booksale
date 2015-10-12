@@ -4,6 +4,11 @@
     cursor: pointer;
 }
 
+#editoruseravatar {
+    width: 100px;
+    height: 100px;
+}
+
 #uploadimg {
     filter:alpha(opacity=0); /*IE滤镜，透明度50%*/
     -moz-opacity:0; /*Firefox私有，透明度50%*/

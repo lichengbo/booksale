@@ -78,10 +78,11 @@ class IndexController extends Controller {
         $data['username'] = $_POST['username'];
         $data['password'] = md5($_POST['password']);
         $data['email'] = $_POST['email'];
+        $find['username'] = $data['username'];
 
         $User = M('User');
 
-        $result = $User->find($data['username']);
+        $result = $User->where($find)->find();
         if($result) {
             $registerInfo['status'] = false;
             $registerInfo['errorInfo'] = '用户名已存在!';
@@ -90,45 +91,13 @@ class IndexController extends Controller {
         } else {
             $User->add($data);
 
-            $result = $User->find($data['username']);
+            $result = $User->where($find)->find();
 
             if($result['username'] == $data['username']) {
                 $registerInfo['status'] = true;
                 $registerInfo['errorInfo'] = '注册成功!';
                 $this->ajaxReturn($registerInfo);
             }
-        }
-    }
-
-    function profile() {
-        $this->display('navbar');
-        $this->display('userinfo');
-    }
-
-    function userlist() {
-        $this->display('navbar');
-        $this->display('userlist');
-    }
-
-    function userlist_data() {
-        if($_SESSION['userinfo']['user_type'] == "0") {
-            $Data = M('user');
-            $result['data'] = $Data->select();
-
-            if($result['data']) {
-                $result['status'] = true;
-                $result['info'] = '成功';
-                $this->ajaxReturn($result);
-            } else {
-                $result['status'] = false;
-                $result['info'] = '数据为空';
-                $this->ajaxReturn($result);
-            }
-        } else {
-            $result['status'] = false;
-            $result['info'] = '您没有该操作权限';
-            $result['user_type'] = $_SESSION['userinfo']['user_type'];
-            $this->ajaxReturn($result);
         }
     }
 

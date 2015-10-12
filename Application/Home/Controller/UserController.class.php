@@ -18,7 +18,7 @@ class UserController extends Controller {
     function resetpassword() {
         $newpassword = $_POST['newpassword'];
         $User = M('User');
-        $User->password =$newpassword;
+        $User->password =md5($newpassword);
         $condition['username'] = $_SESSION['userinfo']['username'];
         if($User->where($condition)->save()) {
             $result['status'] = true;
@@ -149,14 +149,115 @@ class UserController extends Controller {
         }
     }
 
-    // admin editor user function
-    function editoruser() {
+    function profile() {
+        $this->display('Index/navbar');
+        $this->display('userinfo');
+    }
 
+    function userlist() {
+        $this->display('Index/navbar');
+        $this->display('userlist');
+    }
+
+    function userlist_data() {
+        if($_SESSION['userinfo']['user_type'] == "0") {
+            $Data = M('user');
+            $result['data'] = $Data->select();
+
+            if($result['data']) {
+                $result['status'] = true;
+                $result['info'] = '成功';
+                $this->ajaxReturn($result);
+            } else {
+                $result['status'] = false;
+                $result['info'] = '数据为空';
+                $this->ajaxReturn($result);
+            }
+        } else {
+            $result['status'] = false;
+            $result['info'] = '您没有该操作权限';
+            $result['user_type'] = $_SESSION['userinfo']['user_type'];
+            $this->ajaxReturn($result);
+        }
+    }
+
+    // admin editor user page
+    function editoruser() {
+        if($_SESSION['userinfo']['user_type'] == "0") {
+            $find['uid'] = $_GET['uid'];
+            $User = M('user');
+            $result = $User->find($find['uid']);
+
+            if ($result) {
+                $this->assign('result', $result);
+                $this->display('Index/navbar');
+                $this->display();
+            } else {
+                $this->error('没有该用户，稍后将返回上一页');
+            }
+        } else {
+            $this->error('您没有该操作权限，稍后将返回上一页');
+        }
+    }
+
+    // 更改用户权限接口
+    function editoruser_data() {
+        if($_SESSION['userinfo']['user_type'] == "0") {
+            $find['uid'] = I('uid'); // 使用I 方法替换默认的$_GET 或 $_POST
+            $User = M('User');
+            $result = $User->find($find['uid']);
+            $changeUserType = I('changeUserType');
+
+            if($result['user_type'] != $changeUserType) {
+                if($User->where($find)->setField('user_type', $changeUserType)) {
+                    $result1['status'] = true;
+                    $result1['info'] = '更改权限成功';
+                    $this->ajaxReturn($result1);
+                } else {
+                    $result1['status'] = false;
+                    $result1['info'] = '更改权限失败';
+                    $this->ajaxReturn($result1);
+                }
+            } else {
+                $result1['status'] = false;
+                $result1['info'] = '权限没变，无需更改';
+                $this->ajaxReturn($result1);
+            }
+        } else {
+            $result1['status'] = false;
+            $result1['info'] = '您没有该操作权限';
+            $this->ajaxReturn($result1);
+        }
     }
 
     // admin delete user function
     function deleteuser() {
+        if($_SESSION['userinfo']['user_type'] == "0") {
+            $find['uid'] = I('uid');
+            $User = M('User');
+            $result = $User->find($find['uid']);
 
+            if($result) {
+                if($User->where($find)->delete()) {
+                    $result1['status'] = true;
+                    $result1['info'] = '删除用户成功';
+                    $this->ajaxReturn($result1);
+                } else {
+                    $result1['status'] = false;
+                    $result1['info'] = '删除用户失败';
+                    $this->ajaxReturn($result1);
+                }
+            } else {
+                $result1['status'] = false;
+                $result1['info'] = '没有该用户';
+                $this->ajaxReturn($result1);
+            }
+
+        } else {
+            $result1['status'] = false;
+            $result1['info'] = '您没有该操作权限';
+            $this->ajaxReturn($result1);
+        }
     }
 }
 ?>

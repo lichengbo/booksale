@@ -37,7 +37,7 @@ $(document).ready(function() {
             dataType: "json",
             success: function (value) {
                 if(value.status) {
-                    location.href = 'index.php?c=index&a=profile'
+                    location.href = 'index.php?c=user&a=profile'
                 } else {
                     alert('图片上传失败！');
                     console.log(value.info);

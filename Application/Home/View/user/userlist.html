@@ -36,7 +36,7 @@
     $(document).ready(function() {
         $.ajax({
             type: 'POST',
-            url: 'index.php?c=index&a=userlist_data',
+            url: 'index.php?c=user&a=userlist_data',
             data: {},
             dataType: 'json',
             success: function(result) {
@@ -58,24 +58,27 @@
                     $(this).click(function() {
                         if(i % 2) {
                             // delete button id = parseInt(i / 2)
-                            var isdelete = confirm('数据删除后不能恢复！确定删除');
+                            var isdelete = confirm('用户数据删除后不能恢复！确定删除');
                             if(isdelete) {
                                 $.ajax({
                                     type: 'POST',
                                     url: 'index.php?c=user&a=deleteuser',
-                                    data: {uid: parseInt(i / 2)},
+                                    data: {uid: result.data[parseInt(i / 2)].uid},
                                     dataType: 'json',
                                     success: function(result) {
                                         alert(result.info);
+                                        if(result.status) {
+                                            window.location.reload();
+                                        }
                                     },
                                     error: function() {
-                                        console.log('delete user ajax error')
+                                        console.log('delete user ajax error');
                                     }
                                 })
                             }
 
                         } else {
-                            location.href = 'index.php?c=user&a=editoruser&uid=' + (i / 2);
+                            location.href = 'index.php?c=user&a=editoruser&uid=' + (result.data[i / 2].uid);
                         }
                     });
                 })
