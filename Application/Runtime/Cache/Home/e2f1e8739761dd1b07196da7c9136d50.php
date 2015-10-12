@@ -24,6 +24,7 @@
                     <label for="email" class="col-md-3 control-label">邮箱</label>
                     <div class="col-md-7">
                         <input type="email" id="email" class="form-control" placeholder="常用邮箱" required>
+                        <span class="help-inline help">邮箱格式错误</span>
                     </div>
                 </div>
                 
@@ -31,6 +32,7 @@
                     <label for="password1" class="col-md-3 control-label">密码</label>
                     <div class="col-md-7">
                         <input type="password" id="password1" class="form-control" placeholder="密码" required>
+                        <span id="passwordErrorInfo" class="help-inline help">密码长度应大于或等于6</span>
                     </div>
                 </div>
 
@@ -38,6 +40,7 @@
                     <label for="password2" class="col-md-3 control-label">确认密码</label>
                     <div class="col-md-7">
                         <input type="password" id="password2" class="form-control" placeholder="再次输入密码" required>
+                        <span id="passwordErrorInfo2" class="help-inline help">密码长度应大于6</span>
                     </div>
                 </div>
 

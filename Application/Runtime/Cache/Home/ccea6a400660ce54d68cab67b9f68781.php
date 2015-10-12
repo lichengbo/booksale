@@ -17,6 +17,7 @@
                     <label for="username" class="col-md-3 control-label">用户名</label>
                     <div class="col-md-7">
                         <input type="text" id="username" class="form-control" placeholder="用户名" required autofocus>
+                        <span id="usernameErrorInfo" class="help-inline help">用户名或密码不正确</span>
                     </div>
                 </div>
                 
@@ -24,6 +25,7 @@
                     <label for="password" class="col-md-3 control-label">密码</label>
                     <div class="col-md-7">
                         <input type="password" id="password" class="form-control" placeholder="密码" required>
+                        <span id="passwordErrorInfo" class="help-inline help">密码长度应大于或等于6</span>
                     </div>
                 </div>
 

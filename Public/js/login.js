@@ -2,8 +2,46 @@ $(document).ready(function() {
     // 获取 cookie 记录的用户名和密码
     $('#username').val($.cookie('username'));
     $('#password').val($.cookie('password'));
+
     // 表单验证
-    $yzmistrue = false;
+    var passwordIsTrue = false;
+    var codeCharIsTrue = false;
+
+    // 密码格式正则表达式
+    var passwordPattern = /^([a-z]|[A-Z]|[0-9]){6,16}$/;
+
+    //  验证密码格式函数
+    function checkPassword() {
+        var len = $(this).val().length;
+        if(len < 6) {
+            $('#passwordErrorInfo').show();
+            passwordIsTrue = false;
+        } else if (len > 16) {
+            $('#passwordErrorInfo').show();
+            $('#passwordErrorInfo').text('密码过长应小于或等于16');
+            passwordIsTrue = false;
+        } else {
+            if(!passwordPattern.test($('#password').val())) {
+                $('#passwordErrorInfo').show();
+                $('#passwordErrorInfo').text('密码格式不正确，应由数字和字母组成');
+                passwordIsTrue = false;
+            } else {
+                passwordIsTrue = true;
+            }
+        }
+    }
+
+    // 验证码验证函数
+    function checkCodechar() {
+        $.post("index.php?c=index&a=checkyzm", {value:$('#yzm').val()}, function(value){
+            if(value.status) {
+                codeCharIsTrue = true;
+            } else {
+                $('#yzm').next().css('display', 'block');
+                codeCharIsTrue = false;
+            }
+        })
+    }
 
     // 重新输入时恢复样式
     function Focus() {
@@ -11,18 +49,15 @@ $(document).ready(function() {
     }
 
     $('#yzm').focus(Focus);
+    $('#username').focus(Focus);
+    $('#password').focus(function() {
+        $('#usernameErrorInfo').hide();
+    });
+    $('#password').focus(Focus);
+    $('#password').blur(checkPassword);
 
     // 检测验证码是否正确
-    $('#yzm').blur(function() {
-        $.post("index.php?c=index&a=checkyzm", {value:$('#yzm').val()}, function(value){
-            if(value.status) {
-                $yzmistrue = true;
-            } else {
-                $yzmistrue = false;
-                $('#yzm').next().css('display', 'block');
-            }
-        })
-    })
+    $('#yzm').blur(checkCodechar)
 
     $("#yzm-img").click(function(){
         $(this).attr("src",'public/php/code_char.php?' + Math.random());
@@ -34,7 +69,7 @@ $(document).ready(function() {
         var password = $('#password').val();
         var isremember = $('#rememberme').prop("checked");
         
-        if ($yzmistrue && username && password) {
+        if (username && passwordIsTrue && codeCharIsTrue) {
             $.ajax({
                 type: "POST",
                 url: "index.php?c=index&a=login_data",
@@ -49,7 +84,8 @@ $(document).ready(function() {
                         }
                         return true;
                     } else {
-                        alert('用户名或密码错误');
+                        //alert('用户名或密码错误');
+                        $('#usernameErrorInfo').show();
                         // 在此 return false 自带校验不失效，但是显示错误提示后会刷新
                         return false;
                     }

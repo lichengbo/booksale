@@ -33,7 +33,7 @@ function getCode($num, $w, $h) {
     //将字符随机显示在画布上,字符的水平间距和位置都按一定波动范围随机生成
     $strx = rand(3, 8);
     for ($i = 0; $i < $num; $i++) {
-        $strpos = rand(1, 6);
+        $strpos = rand(1, 4);
         imagestring($im, 5, $strx, $strpos, substr($code, $i, 1), $black);
         $strx += rand(8, 14);
     }

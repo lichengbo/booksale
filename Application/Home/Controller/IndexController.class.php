@@ -78,6 +78,7 @@ class IndexController extends Controller {
         $data['username'] = $_POST['username'];
         $data['password'] = md5($_POST['password']);
         $data['email'] = $_POST['email'];
+        $data['user_type'] = 2;
         $find['username'] = $data['username'];
 
         $User = M('User');
