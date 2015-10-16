@@ -150,12 +150,10 @@ class UserController extends Controller {
     }
 
     function profile() {
-        $this->display('Index/navbar');
         $this->display('userinfo');
     }
 
     function userlist() {
-        $this->display('Index/navbar');
         $this->display('userlist');
     }
 
@@ -190,7 +188,6 @@ class UserController extends Controller {
 
             if ($result) {
                 $this->assign('result', $result);
-                $this->display('Index/navbar');
                 $this->display();
             } else {
                 $this->error('没有该用户，稍后将返回上一页');

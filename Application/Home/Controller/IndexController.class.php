@@ -103,8 +103,9 @@ class IndexController extends Controller {
     }
 
     function stock_in() {
-        $this->display('navbar');
         $this->display();
+
+
     }
 
     function stock_in_data() {
@@ -159,7 +160,6 @@ class IndexController extends Controller {
     }
 
     function stock_out() {
-        $this->display('navbar');
         $this->display();
     }
 
@@ -167,16 +167,25 @@ class IndexController extends Controller {
     }
 
     function sale() {
-        $this->display('navbar');
         $this->display();
     }
 
     function sale_data() {
-        
+        $Data = M('storage');
+        $result['data'] = $Data->select();
+
+        if($result['data']) {
+            $result['status'] = true;
+            $result['info'] = '成功';
+            $this->ajaxReturn($result);
+        } else {
+            $result['status'] = false;
+            $result['info'] = '数据为空';
+            $this->ajaxReturn($result);
+        }
     }
 
     function storage() {
-        $this->display('navbar');
         $this->display();
     }
 
@@ -202,7 +211,6 @@ class IndexController extends Controller {
     }
 
     function salerecord() {
-        $this->display('navbar');
         $this->display();
     }
 
@@ -228,7 +236,6 @@ class IndexController extends Controller {
     }
 
     function stock_inrecord() {
-        $this->display('navbar');
         $this->display();
     }
 
@@ -254,7 +261,6 @@ class IndexController extends Controller {
     }
 
     function stock_outrecord() {
-        $this->display('navbar');
         $this->display();
     }
 

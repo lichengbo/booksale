@@ -24,14 +24,14 @@
             </div>
             
             <div class="table-responsive">
-                <table role="grid" id="DataTables_Table_1" class="table table-striped table-bordered table-hover m-b-none">
+                <table role="grid" class="table table-striped table-bordered table-hover m-b-none">
                     <thead>
                         <tr role="row">
                             <th>ISBN</th>
                             <th>书名</th>
                             <th>作者</th>
                             <th>出版社</th>
-                            <th>价格</th>
+                            <th>售价</th>
                             <th>剩余数量</th>
                             <th>购买</th>
                         </tr>
@@ -78,6 +78,19 @@
             $(this).addClass('active');
     });
 
+    // 获取库存信息
+    $.ajax({
+        type: 'post',
+        url: 'index.php?c=index&a=sale_data',
+        dataType: 'json',
+        success: function(result) {
+            if(result.status) {
+                for(var i = 0; i < result.data.length; i++)
+                    $('#saledRecord').append($('<tr class="odd" role="row"><td>'+ result.data[i].isbn +'</td><td>《'+result.data[i].bookname+'》</td><td>'+result.data[i].author+'</td><td>'+ result.data[i].publisher +'</td><td>'+ result.data[i].price +'</td><td>'+ result.data[i].storage_size +'</td><td><button data-toggle="modal" data-target="#myModal" class="btn btn-default">提交</button></td></tr>'));
+            }
+        }
+    })
+
     $("#searchISBN").find('button').click(function()
     {
         var find = $("#searchISBN").find('input').val();
@@ -85,7 +98,7 @@
         
         if(find.length > 0)
         $.ajax({
-            type: "GET",
+            type: "post",
             url: "http://localhost/BookSale/contraller/sale.php",
             data:{ISBN:find},
             dataType: "json",
