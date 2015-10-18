@@ -167,7 +167,15 @@ class IndexController extends Controller {
     }
 
     function sale() {
-        $this->display();
+        $Storage = M('Storage');
+        $result = $Storage->select();
+
+        if ($result) {
+            $this->assign('result', $result);
+            $this->display();
+        } else {
+            $this->error('没有书籍，稍后将返回上一页');
+        }
     }
 
     function sale_data() {
@@ -182,6 +190,19 @@ class IndexController extends Controller {
             $result['status'] = false;
             $result['info'] = '数据为空';
             $this->ajaxReturn($result);
+        }
+    }
+
+    function bookdetail() {
+        $data['isbn'] = I('bookid');
+        $Storage = M('Storage');
+        $result = $Storage->find($data['isbn']);
+
+        if ($result) {
+            $this->assign('result', $result);
+            $this->display();
+        } else {
+            $this->error('没有该书籍，稍后将返回上一页');
         }
     }
 

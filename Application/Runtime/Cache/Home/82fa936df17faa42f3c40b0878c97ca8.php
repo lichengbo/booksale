@@ -6,8 +6,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>图书销售系统-销售</title>
     <link rel="stylesheet" type="text/css" href="public/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="public/css/booklist.css">
 </head>
 <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="nav-header">
+                <a class="navbar-brand" href="#">图书销售系统</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul id="mynav" class="nav navbar-nav">
+                    <li>
+                        <a href="index.php?c=index&a=stock_in">进书</a>
+                    </li>
+                    <li >
+                        <a href="index.php?c=index&a=sale">购书</a>
+                    </li>
+                    <li>
+                        <a href="index.php?c=index&a=stock_out">退书</a>
+                    </li>
+                    <!--<li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            统计
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">-->
+                            <li>
+                                <a href="index.php?c=index&a=storage">库存表</a>
+                            </li>
+                            <li>
+                                <a href="index.php?c=index&a=salerecord">销售量表</a>
+                            </li>
+                            <li>
+                                <a href="index.php?c=index&a=stock_inrecord">进货记录</a>
+                            </li>
+                            <li>
+                                <a href="index.php?c=index&a=stock_outrecord">退货记录</a>
+                            </li>
+                        <!--</ul>-->
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav pull-right">
+                    <li class="dropdown">
+                        <a href="#" id="infolist" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <img id="avatar" src="public/img/avatar.png" width="20px" height="20px" title="头像" class="img-circle">
+                        </a>
+                        <ul id="avatarlist" class="dropdown-menu animated fadeInRight">
+                            <li>
+                                <a href="index.php?c=user&a=profile">账户信息</a>
+                            </li>
+                            <li>
+                                <a href="index.php?c=user&a=userlist">用户列表</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a id="logout" href="index.php?c=index&a=login">注销</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+<script src="public/js/jquery-1.11.2.min.js"></script>
+<script src="public/js/userinfo.js"></script>
     <div class="container">
         <div class="panel panel-default" style="margin-top:80px;">
             <div class="panel-heading">
@@ -22,23 +86,45 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="table-responsive">
-                <table role="grid" class="table table-striped table-bordered table-hover m-b-none">
-                    <thead>
-                        <tr role="row">
-                            <th>ISBN</th>
-                            <th>书名</th>
-                            <th>作者</th>
-                            <th>出版社</th>
-                            <th>售价</th>
-                            <th>剩余数量</th>
-                            <th>购买</th>
-                        </tr>
-                    </thead>
-                    <tbody id="saledRecord">
-                    </tbody>
-                </table>
+                <ul id="booklist">
+                    <?php if(is_array($result)): $i = 0; $__LIST__ = $result;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><li class="col-md-4">
+                            <a href="index.php?c=index&a=bookdetail&bookid=<?php echo ($vo["isbn"]); ?>">
+                                <img src=<?php echo ($vo["book_image"]); ?>>
+                            </a>
+                            <p class="bookname"><a href="index.php?c=index&a=bookdetail&bookid=<?php echo ($vo["isbn"]); ?>" ><?php echo ($vo["bookname"]); ?></a></p>
+                            <p class="bookprice">￥<?php echo ($vo["sale_price"]); ?></p>
+                        </li><?php endforeach; endif; else: echo "" ;endif; ?>
+                    <!--<li class="col-md-4">
+                        <a href="index.php?c=index&a=bookdetail&bookid=100001">
+                            <img src="public/img/javascript.jpg">
+                        </a>
+                        <p class="bookname"><a href="index.php?c=index&a=bookdetail&bookid=100001" >JavaScript 高级程序编程</a></p>
+                        <p class="bookprice">￥28.5</p>
+                    </li>
+                    <li class="col-md-4">
+                        <a href="index.php?c=index&a=bookdetail&bookid=100003">
+                            <img src="public/img/react.jpg">
+                        </a>
+                        <p class="bookname"><a href="index.php?c=index&a=bookdetail&bookid=100003" >React</a></p>
+                        <p class="bookprice">￥28.5</p>
+                    </li>
+                    <li class="col-md-4">
+                        <a href="index.php?c=index&a=bookdetail&bookid=100004">
+                            <img src="public/img/php.jpg">
+                        </a>
+                        <p class="bookname"><a href="index.php?c=index&a=bookdetail&bookid=100004" >PHP 从入门到精通</a></p>
+                        <p class="bookprice">￥28.5</p>
+                    </li>
+                    <li class="col-md-4">
+                        <a href="index.php?c=index&a=bookdetail&bookid=100004">
+                            <img src="public/img/php.jpg">
+                        </a>
+                        <p class="bookname"><a href="index.php?c=index&a=bookdetail&bookid=100004" >PHP 从入门到精通</a></p>
+                        <p class="bookprice">￥28.5</p>
+                    </li>-->
+                </ul>
             </div>
         </div>
     </div>
@@ -69,8 +155,7 @@
     </div>
 <!-- Modal end-->
 
-<script type="text/javascript" src="public/js/jquery-1.11.2.min.js"></script>
-<script type="text/javascript" src="public/js/bootstrap.min.js"></script> 
+<script type="text/javascript" src="public/js/bootstrap.min.js"></script>
 <script type="text/javascript">
     $('#mynav').find('li').each(function(i)
     {
@@ -79,7 +164,7 @@
     });
 
     // 获取库存信息
-    $.ajax({
+   /* $.ajax({
         type: 'post',
         url: 'index.php?c=index&a=sale_data',
         dataType: 'json',
@@ -182,7 +267,7 @@
             }
 
         })
-    })
+    })*/
 
     
 </script>

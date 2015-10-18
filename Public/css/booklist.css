@@ -1,0 +1,27 @@
+* {
+    list-style: none;
+}
+#booklist img {
+    width: 200px;
+}
+
+#booklist li {
+    padding: 10px;
+}
+
+#booklist p {
+    padding-left: 30px;
+}
+
+.bookname {
+    padding-top: 10px;
+}
+
+.bookname a {
+    color: black;
+}
+
+.bookprice {
+    color: #C30;
+    font-weight: bold;
+}
